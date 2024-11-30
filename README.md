@@ -37,17 +37,17 @@ https://woniu336.github.io/vps-date/
 
 图1：
 
-![](https://s.qkmov.cc/files/202412010412476.webp)
+![Image](https://img.meituan.net/video/a1dd1235b55426848b809904ca47fcd1136540.png)
 
 图2：
 
-![](https://s.qkmov.cc/files/202412010414004.webp)
+![Image](https://img.meituan.net/video/bfaac2b0278fc258c8b9adbe6a9339b965243.png)
 
 
 ## 开启GitHub Pages
 
 
-![](https://s.qkmov.cc/files/202412010415200.webp)
+![Image](https://img.meituan.net/video/41151f0258dcd0e8dde99c9538fe0e8184301.png)
 
 
 
@@ -92,7 +92,6 @@ ps aux | grep vps_monitor.py
 ```
 kill <进程ID>
 ```
-
 
 
 
