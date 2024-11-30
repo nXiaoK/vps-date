@@ -28,7 +28,11 @@ jobs:
     
     - name: Run monitor script and update data
       run: |
+        pwd  # 显示当前目录
+        ls -la  # 显示文件列表
         python update_vps_data.py
+        echo "更新后的文件内容:"
+        tail -n 20 index.html  # 显示文件最后20行
       env:
         DINGTALK_TOKEN: ${{ secrets.DINGTALK_TOKEN }}
         DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
@@ -38,6 +42,7 @@ jobs:
         git config --local user.name 'github-actions[bot]'
         git config --local user.email 'github-actions[bot]@users.noreply.github.com'
         git add -A
+        git status  # 显示git状态
         git commit -m "Auto update VPS data" || echo "No changes to commit"
     
     - name: Push changes
