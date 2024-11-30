@@ -35,19 +35,29 @@
     <div class="container py-5">
         <h1 class="text-center mb-5">VPS账单订阅追踪</h1>
         
-        <div class="row" id="vpsCards"></div>
+        <div class="row" id="vpsCards">
+            <!-- 这里会显示VPS卡片 -->
+            <div class="col-12 text-center" id="loadingMessage">
+                正在加载VPS信息...
+            </div>
+        </div>
         
         <div class="total-cost">
             <h3 class="text-center">月度总支出</h3>
-            <p class="text-center h4" id="totalCost"></p>
+            <p class="text-center h4" id="totalCost">计算中...</p>
         </div>
     </div>
 
     <script>
+        // 调试信息
+        console.log('脚本开始执行');
+        
         const vpsServices = [
             // 数据会在这里更新
         ];
         
+        console.log('VPS服务数据:', vpsServices);  // 添加调试输出
+
         function formatDate(date) {
             return date.toLocaleDateString('zh-CN', {
                 year: 'numeric',
@@ -63,22 +73,27 @@
         };
 
         function calculateDaysUntilExpire(service) {
-            const today = new Date();
-            let expireDate;
-            
-            if (service.expireDate) {
-                expireDate = new Date(service.expireDate);
-            } else if (service.monthlyExpireDay) {
-                expireDate = new Date(today.getFullYear(), today.getMonth(), service.monthlyExpireDay);
-                if (today.getDate() > service.monthlyExpireDay) {
-                    expireDate = new Date(today.getFullYear(), today.getMonth() + 1, service.monthlyExpireDay);
+            try {
+                const today = new Date();
+                let expireDate;
+                
+                if (service.expireDate) {
+                    expireDate = new Date(service.expireDate);
+                } else if (service.monthlyExpireDay) {
+                    expireDate = new Date(today.getFullYear(), today.getMonth(), service.monthlyExpireDay);
+                    if (today.getDate() > service.monthlyExpireDay) {
+                        expireDate = new Date(today.getFullYear(), today.getMonth() + 1, service.monthlyExpireDay);
+                    }
+                } else {
+                    return '未设置到期日';
                 }
-            } else {
-                return '未设置到期日';
+                
+                const diffTime = expireDate - today;
+                return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            } catch (error) {
+                console.error('计算到期日期时出错:', error);
+                return '计算错误';
             }
-            
-            const diffTime = expireDate - today;
-            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         }
 
         function convertToCNY(amount, currency) {
@@ -86,48 +101,71 @@
         }
 
         function updateVPSCards() {
-            const container = document.getElementById('vpsCards');
-            let totalCostCNY = 0;
-            
-            container.innerHTML = vpsServices.map(service => {
-                const daysLeft = calculateDaysUntilExpire(service);
-                const costInCNY = convertToCNY(service.cost, service.currency);
-                totalCostCNY += costInCNY;
+            try {
+                console.log('开始更新VPS卡片');
+                const container = document.getElementById('vpsCards');
+                const loadingMessage = document.getElementById('loadingMessage');
                 
-                let expireDateText;
-                if (service.expireDate) {
-                    const expireDate = new Date(service.expireDate);
-                    expireDateText = formatDate(expireDate);
-                } else if (service.monthlyExpireDay) {
-                    expireDateText = `每月${service.monthlyExpireDay}号`;
-                } else {
-                    expireDateText = '未设置到期日';
+                if (!container) {
+                    console.error('找不到vpsCards容器');
+                    return;
                 }
                 
-                const warningClass = daysLeft <= 7 ? 'text-danger' : '';
-                
-                return `
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card border-${service.color}">
-                            <div class="card-header bg-${service.color} text-white">
-                                ${service.name}
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">月付: ${service.cost} ${service.currency}</p>
-                                <p class="card-text">约合: ${costInCNY.toFixed(2)} CNY</p>
-                                <p class="card-text">到期日: ${expireDateText}</p>
-                                <p class="card-text ${warningClass}">距离到期还有: <span class="countdown">${daysLeft}</span> 天</p>
+                if (vpsServices.length === 0) {
+                    console.log('没有VPS服务数据');
+                    container.innerHTML = '<div class="col-12 text-center">暂无VPS服务数据</div>';
+                    return;
+                }
+
+                let totalCostCNY = 0;
+                const cardsHTML = vpsServices.map(service => {
+                    console.log('处理服务:', service.name);
+                    const daysLeft = calculateDaysUntilExpire(service);
+                    const costInCNY = convertToCNY(service.cost, service.currency);
+                    totalCostCNY += costInCNY;
+                    
+                    let expireDateText;
+                    if (service.expireDate) {
+                        const expireDate = new Date(service.expireDate);
+                        expireDateText = formatDate(expireDate);
+                    } else if (service.monthlyExpireDay) {
+                        expireDateText = `每月${service.monthlyExpireDay}号`;
+                    } else {
+                        expireDateText = '未设置到期日';
+                    }
+                    
+                    const warningClass = daysLeft <= 7 ? 'text-danger' : '';
+                    
+                    return `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-${service.color}">
+                                <div class="card-header bg-${service.color} text-white">
+                                    ${service.name}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">月付: ${service.cost} ${service.currency}</p>
+                                    <p class="card-text">约合: ${costInCNY.toFixed(2)} CNY</p>
+                                    <p class="card-text">到期日: ${expireDateText}</p>
+                                    <p class="card-text ${warningClass}">距离到期还有: <span class="countdown">${daysLeft}</span> 天</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
 
-            document.getElementById('totalCost').textContent = `¥${totalCostCNY.toFixed(2)} CNY`;
+                container.innerHTML = cardsHTML;
+                document.getElementById('totalCost').textContent = `¥${totalCostCNY.toFixed(2)} CNY`;
+                console.log('VPS卡片更新完成');
+            } catch (error) {
+                console.error('更新VPS卡片时出错:', error);
+            }
         }
 
         // 初始更新
-        updateVPSCards();
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM加载完成，开始初始化');
+            updateVPSCards();
+        });
         
         // 每天更新一次
         setInterval(updateVPSCards, 24 * 60 * 60 * 1000);

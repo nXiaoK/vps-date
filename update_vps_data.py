@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 import requests
+import re
 
 def get_vps_data():
     """获取VPS数据"""
@@ -78,43 +79,44 @@ def update_html_file():
     try:
         data = get_vps_data()
         
-        # 读取原始HTML文件
-        print("正在读取 index.html...")  # 添加调试信息
+        print("正在读取 index.html...")
         with open('index.html', 'r', encoding='utf-8') as f:
             html_content = f.read()
         
-        print("原始文件大小:", len(html_content))  # 添加调试信息
+        print("原始文件大小:", len(html_content))
         
         # 更新VPS数据
         vps_data_str = json.dumps(data['services'], ensure_ascii=False, indent=4)
         
-        # 检查是否存在需要替换的标记
-        if 'const vpsServices = [' not in html_content:
-            raise ValueError("未找到 vpsServices 标记")
-            
-        # 在</h1>标签后添加最后更新时间
-        new_content = html_content.replace(
-            '</h1>',
-            f'</h1>\n        <div class="last-update text-center mb-3">最后更新时间: {data["lastUpdate"]}</div>'
-        )
+        # 使用正则表达式替换 vpsServices 数组内容
+        pattern = r'const\s+vpsServices\s*=\s*\[([\s\S]*?)\]\s*;'
+        new_content = re.sub(pattern, f'const vpsServices = {vps_data_str};', html_content)
         
-        # 更新VPS服务数据
-        new_content = new_content.replace(
-            'const vpsServices = [',
-            f'const vpsServices = {vps_data_str}'
-        )
+        # 更新最后更新时间
+        if '<div class="last-update text-center mb-3">' in html_content:
+            # 如果已存在更新时间，则替换它
+            new_content = re.sub(
+                r'<div class="last-update text-center mb-3">.*?</div>',
+                f'<div class="last-update text-center mb-3">最后更新时间: {data["lastUpdate"]}</div>',
+                new_content
+            )
+        else:
+            # 如果不存在，则在标题后添加
+            new_content = new_content.replace(
+                '</h1>',
+                f'</h1>\n        <div class="last-update text-center mb-3">最后更新时间: {data["lastUpdate"]}</div>'
+            )
         
-        print("新文件大小:", len(new_content))  # 添加调试信息
+        print("新文件大小:", len(new_content))
         
-        # 写入更新后的文件
-        print("正在写入更新后的文件...")  # 添加调试信息
+        print("正在写入更新后的文件...")
         with open('index.html', 'w', encoding='utf-8') as f:
             f.write(new_content)
             
-        print("文件更新完成")  # 添加调试信息
+        print("文件更新完成")
         
     except Exception as e:
-        print(f"更新失败: {str(e)}")  # 添加错误信息
+        print(f"更新失败: {str(e)}")
         raise
 
 if __name__ == "__main__":
