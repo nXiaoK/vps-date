@@ -1,17 +1,19 @@
+## 演示
 
-## MJJ订阅追踪
-
-
-
-监控页面
 
 ```
 https://woniu336.github.io/vps-date/
 ```
 
-添加机子信息，格式：
+- 每天0点和12点自动运行更新监控信息
+- 首次使用，可以手动触发运行测试
 
-例如：
+
+## 添加监控
+
+拷贝仓库，修改 update_vps_data.py
+
+添加小鸡信息，例如：
 
 ```
         {
@@ -30,6 +32,24 @@ https://woniu336.github.io/vps-date/
 - monthlyExpireDay 每月续费的日期，例如：3，就是每月3号续费，注意：expireDate和monthlyExpireDay只能二选一
 - color 颜色
 - url 链接
+
+## 手动触发运行
+
+图1：
+
+![](https://s.qkmov.cc/files/202412010412476.webp)
+
+图2：
+
+![](https://s.qkmov.cc/files/202412010414004.webp)
+
+
+## 开启GitHub Pages
+
+
+![](https://s.qkmov.cc/files/202412010415200.webp)
+
+
 
 
 ## 通知
