@@ -8,7 +8,7 @@
     <style>
         .card {
             transition: transform 0.2s;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -20,31 +20,62 @@
         }
         .total-cost {
             background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px auto 25px;
+            max-width: 300px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .last-update {
             color: #666;
             font-size: 0.9em;
-            margin-bottom: 20px;
+            margin: 10px 0;
+        }
+        .container {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .card-body {
+                padding: 12px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .card-text {
+                margin-bottom: 0.5rem;
+            }
+        }
+        .card-header {
+            padding: 0.5rem 1rem;
+        }
+        .total-cost h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        .total-cost p {
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <h1 class="text-center mb-5">VPS账单订阅追踪</h1>
-        
-        <div class="row" id="vpsCards">
-            <!-- 这里会显示VPS卡片 -->
-            <div class="col-12 text-center" id="loadingMessage">
-                正在加载VPS信息...
-            </div>
-        </div>
+    <div class="container">
+        <h1 class="text-center mb-3">VPS账单订阅追踪</h1>
         
         <div class="total-cost">
             <h3 class="text-center">月度总支出</h3>
             <p class="text-center h4" id="totalCost">计算中...</p>
+        </div>
+
+        <div class="row" id="vpsCards">
+            <div class="col-12 text-center" id="loadingMessage">
+                正在加载VPS信息...
+            </div>
         </div>
     </div>
 
