@@ -12,56 +12,64 @@ def get_vps_data():
             "cost": 8,
             "currency": "USD",
             "monthlyExpireDay": 3,
-            "color": "primary"
+            "color": "primary",
+            "url": "https://billing.spartanhost.net/login"
         },
         {
             "name": "阿里云轻量香港",
             "cost": 34,
             "currency": "CNY",
             "monthlyExpireDay": 29,
-            "color": "danger"
+            "color": "danger",
+            "url": "https://swasnext.console.aliyun.com/servers/cn-hongkong"
         },
         {
             "name": "v.ps圣何塞",
             "cost": 2.75,
             "currency": "EUR",
             "expireDate": "2025-2-7",
-            "color": "primary"
+            "color": "primary",
+            "url": "https://vps.hosting/clientarea/"
         },
         {
             "name": "OVH加拿大0.97",
             "cost": 0.97,
             "currency": "USD",
             "expireDate": "2025-2-9",
-            "color": "danger"
+            "color": "danger",
+            "url": "https://ca.ovh.com/manager/#/hub"
         },
         {
             "name": "raksmart-hk",
             "cost": 0,
             "currency": "USD",
             "expireDate": "2025-11-9",
-            "color": "success"
+            "color": "success",
+            "url": "https://billing.raksmart.com/whmcs/clientarea.php?action=products"
         },
         {
             "name": "OVH美西",
             "cost": 5.5,
             "currency": "EUR",
             "monthlyExpireDay": 18,
-            "color": "success"
+            "color": "success",
+            "url": "https://us.ovhcloud.com/vps/"
         },
         {
             "name": "卢森堡2G",
             "cost": 7,
             "currency": "USD",
             "monthlyExpireDay": 19,
-            "color": "warning"
+            "color": "warning",
+            "url": "https://my.frantech.ca/cart.php?gid=39"
         },
         {
             "name": "Netcup4c8G",
             "cost": 5.75,
             "currency": "EUR",
             "monthlyExpireDay": 29,
-            "color": "info"
+            "color": "info",
+            "url": "https://www.customercontrolpanel.de/index.php?action=se"
         }
     ]
     
