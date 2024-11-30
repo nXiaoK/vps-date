@@ -11,7 +11,7 @@ def get_vps_data():
             "name": "斯巴达VPS",
             "cost": 8,
             "currency": "USD",
-            "monthlyExpireDay": 3,
+            "monthlyExpireDay": 15,
             "color": "primary"
         },
         {
