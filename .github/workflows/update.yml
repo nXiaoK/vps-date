@@ -2,7 +2,7 @@ name: Update VPS Info
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # 每12小时运行一次（0点和12点）
+    - cron: '0 */6 * *'  # 每6小时运行一次
   workflow_dispatch:      # 允许手动触发
 
 jobs:
@@ -30,11 +30,10 @@ jobs:
     
     - name: Run monitor script and update data
       run: |
-        pwd  # 显示当前目录
-        ls -la  # 显示文件列表
         python update_vps_data.py
+        python vps_reminder.py
         echo "更新后的文件内容:"
-        tail -n 20 index.html  # 显示文件最后20行
+        tail -n 20 index.html
       env:
         DINGTALK_TOKEN: ${{ secrets.DINGTALK_TOKEN }}
         DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
@@ -44,7 +43,7 @@ jobs:
         git config --local user.name 'github-actions[bot]'
         git config --local user.email 'github-actions[bot]@users.noreply.github.com'
         git add -A
-        git status  # 显示git状态
+        git status
         git commit -m "Auto update VPS data" || echo "No changes to commit"
     
     - name: Push changes
