@@ -55,6 +55,13 @@ https://woniu336.github.io/vps-date/
 ## 通知
 
 > 本项目没有整合通知，需要下载 vps_monitor.py 脚本到机子上运行
+> 记得把小鸡ip加入到钉钉ip段
+
+![Image](https://img.meituan.net/video/b873c041a39d51ba8a26632bfaebde6722621.png)
+
+通知测试
+
+![Image](https://img.meituan.net/video/38ec1feedfcfae28dc36cc3251820ff817647.png)
 
 
 1. 安装依赖
