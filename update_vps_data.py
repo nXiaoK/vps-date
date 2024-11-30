@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 import re
 
@@ -65,9 +65,11 @@ def get_vps_data():
         }
     ]
     
-    # 计算最后更新时间
-    update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"生成更新时间: {update_time}")  # 添加调试信息
+    # 计算北京时间
+    utc_time = datetime.utcnow()
+    beijing_time = utc_time + timedelta(hours=8)
+    update_time = beijing_time.strftime("%Y-%m-%d %H:%M:%S")
+    print(f"生成更新时间 (北京时间): {update_time}")
     
     return {
         "services": vps_services,
