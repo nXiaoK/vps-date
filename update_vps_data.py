@@ -3,58 +3,6 @@ import os
 from datetime import datetime, timedelta
 import requests
 import re
-import time
-
-def send_dingding_msg(msg):
-    timestamp = str(round(time.time() * 1000))
-    secret = os.environ.get('DING_SECRET')
-    access_token = os.environ.get('DING_TOKEN')
-    
-    if not secret or not access_token:
-        print("未配置钉钉密钥，跳过通知")
-        return
-        
-    url = f'https://oapi.dingtalk.com/robot/send?access_token={access_token}'
-    
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    
-    data = {
-        "msgtype": "text",
-        "text": {
-            "content": f"VPS到期提醒：\n{msg}"
-        }
-    }
-
-    try:
-        response = requests.post(url, headers=headers, json=data)
-        if response.status_code == 200:
-            print("钉钉通知发送成功")
-        else:
-            print(f"钉钉通知发送失败: {response.text}")
-    except Exception as e:
-        print(f"发送钉钉通知异常: {str(e)}")
-
-def check_expiration(vps_list):
-    today = datetime.now()
-    notification_msg = []
-    
-    for vps in vps_list:
-        if "expireDate" in vps:
-            expire_date = datetime.strptime(vps["expireDate"], "%Y-%m-%d")
-            days_left = (expire_date - today).days
-            
-            if days_left <= 3:  # 提前3天提醒
-                notification_msg.append(f"{vps['name']} 将在 {days_left} 天后到期")
-        
-        elif "monthlyExpireDay" in vps:
-            monthly_day = vps["monthlyExpireDay"]
-            if today.day == monthly_day - 1:  # 提前1天提醒
-                notification_msg.append(f"{vps['name']} 将在明天进行续费")
-    
-    if notification_msg:
-        send_dingding_msg("\n".join(notification_msg))
 
 def get_vps_data():
     """获取VPS数据"""
@@ -63,7 +11,7 @@ def get_vps_data():
             "name": "斯巴达VPS",
             "cost": 8,
             "currency": "USD",
-            "monthlyExpireDay": 3,
+            "monthlyExpireDay": 15,
             "color": "primary",
             "url": "https://billing.spartanhost.net/login"
         },
@@ -131,9 +79,6 @@ def get_vps_data():
     update_time = beijing_time.strftime("%Y-%m-%d %H:%M:%S")
     print(f"生成更新时间 (北京时间): {update_time}")
     
-    # 添加到期检查
-    check_expiration(vps_services)
-    
     return {
         "services": vps_services,
         "lastUpdate": update_time
@@ -184,8 +129,5 @@ def update_html_file():
         print(f"更新失败: {str(e)}")
         raise
 
-def main():
-    update_html_file()
-
 if __name__ == "__main__":
-    main() 
+    update_html_file() 
