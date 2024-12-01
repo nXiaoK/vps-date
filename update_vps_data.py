@@ -19,7 +19,7 @@ def get_vps_data():
             "name": "阿里云轻量香港",
             "cost": 34,
             "currency": "CNY",
-            "monthlyExpireDay": 29,
+            "monthlyExpireDay": 4,
             "color": "danger",
             "url": "https://swasnext.console.aliyun.com/servers/cn-hongkong"
         },
