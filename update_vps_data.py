@@ -11,7 +11,7 @@ def get_vps_data():
             "name": "斯巴达VPS",
             "cost": 8,
             "currency": "USD",
-            "expireDate": 2025-1-15,
+            "expireDate": "2025-1-15"，
             "color": "primary",
             "url": "https://billing.spartanhost.net/login"
         },
