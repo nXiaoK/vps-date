@@ -11,7 +11,7 @@ def get_vps_data():
             "name": "Netcup-VPS1000",
             "cost": 5.75,
             "currency": "EUR",
-            "expireDate": "2024-12-26",
+            "monthlyExpireDay": 26,
             "color": "primary",
             "url": "https://www.customercontrolpanel.de/produkte.php"
         },
@@ -19,7 +19,7 @@ def get_vps_data():
             "name": "OVH-KS-LE-1",
             "cost": 11.1,
             "currency": "USD",
-            "expireDate": "2025-1-21",
+            "monthlyExpireDay": 21,
             "color": "primary",
             "url": "https://ca.ovh.com/manager/#/hub/"
         },
@@ -35,7 +35,7 @@ def get_vps_data():
             "name": "OVH-0.97",
             "cost": 0.97,
             "currency": "USD",
-            "expireDate": "2024-12-26",
+            "monthlyExpireDay": 26,
             "color": "primary",
             "url": "https://ca.ovh.com/manager/#/hub/"
         },
@@ -43,7 +43,7 @@ def get_vps_data():
             "name": "OVH-0.81",
             "cost": 0.81,
             "currency": "EUR",
-            "expireDate": "2024-12-26",
+            "monthlyExpireDay": 26,
             "color": "primary",
             "url": "https://ovh.ie"
         },
@@ -67,7 +67,7 @@ def get_vps_data():
             "name": "Bagevm-Hong Kong - BFTINY",
             "cost": 2.59,
             "currency": "USD",
-            "expireDate": "2025-12-28",
+            "monthlyExpireDay": 28,
             "color": "primary",
             "url": "https://bagevm.com/clientarea.php"
         }
