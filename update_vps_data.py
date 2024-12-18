@@ -70,7 +70,7 @@ def get_vps_data():
             "expireDate": "2025-12-28",
             "color": "primary",
             "url": "https://bagevm.com/clientarea.php"
-        },
+        }
 
     ]
     
