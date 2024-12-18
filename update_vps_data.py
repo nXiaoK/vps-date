@@ -8,69 +8,70 @@ def get_vps_data():
     """获取VPS数据"""
     vps_services = [
         {
-            "name": "斯巴达VPS",
-            "cost": 8,
-            "currency": "USD",
-            "expireDate": "2025-1-15",
-            "color": "primary",
-            "url": "https://billing.spartanhost.net/login"
-        },
-        {
-            "name": "阿里云轻量香港",
-            "cost": 34,
-            "currency": "CNY",
-            "monthlyExpireDay": 29,
-            "color": "danger",
-            "url": "https://swasnext.console.aliyun.com/servers/cn-hongkong"
-        },
-        {
-            "name": "v.ps圣何塞",
-            "cost": 2.75,
-            "currency": "EUR",
-            "expireDate": "2025-2-7",
-            "color": "primary",
-            "url": "https://vps.hosting/clientarea/"
-        },
-        {
-            "name": "OVH加拿大0.97",
-            "cost": 0.97,
-            "currency": "USD",
-            "expireDate": "2025-2-9",
-            "color": "danger",
-            "url": "https://ca.ovh.com/manager/#/hub"
-        },
-        {
-            "name": "raksmart-hk",
-            "cost": 0,
-            "currency": "USD",
-            "expireDate": "2025-11-9",
-            "color": "success",
-            "url": "https://billing.raksmart.com/whmcs/clientarea.php?action=products"
-        },
-        {
-            "name": "OVH美西",
-            "cost": 5.5,
-            "currency": "EUR",
-            "monthlyExpireDay": 18,
-            "color": "success",
-            "url": "https://us.ovhcloud.com/vps/"
-        },
-        {
-            "name": "卢森堡2G",
-            "cost": 7,
-            "currency": "USD",
-            "monthlyExpireDay": 19,
-            "color": "warning",
-            "url": "https://my.frantech.ca/cart.php?gid=39"
-        },
-        {
-            "name": "Netcup4c8G",
+            "name": "Netcup-VPS1000",
             "cost": 5.75,
             "currency": "EUR",
-            "monthlyExpireDay": 29,
-            "color": "info",
-            "url": "https://www.customercontrolpanel.de/index.php?action=se"
-        }
+            "expireDate": "2024-12-26",
+            "color": "primary",
+            "url": "https://www.customercontrolpanel.de/produkte.php"
+        },
+        {
+            "name": "OVH-KS-LE-1",
+            "cost": 11.1,
+            "currency": "USD",
+            "expireDate": "2025-1-21",
+            "color": "primary",
+            "url": "https://ca.ovh.com/manager/#/hub/"
+        },
+        {
+            "name": "Claw-HK",
+            "cost": 4,
+            "currency": "USD",
+            "expireDate": "2024-12-29",
+            "color": "primary",
+            "url": "https://claw.cloud/clientarea.php"
+        },
+        {
+            "name": "OVH-0.97",
+            "cost": 0.97,
+            "currency": "USD",
+            "expireDate": "2024-12-26",
+            "color": "primary",
+            "url": "https://ca.ovh.com/manager/#/hub/"
+        },
+        {
+            "name": "OVH-0.81",
+            "cost": 0.81,
+            "currency": "EUR",
+            "expireDate": "2024-12-26",
+            "color": "primary",
+            "url": "https://ovh.ie"
+        },
+        {
+            "name": "V.PS-San Jose Mini Pro",
+            "cost": 19.98,
+            "currency": "EUR",
+            "expireDate": "2025-2-24",
+            "color": "primary",
+            "url": "https://v.ps"
+        },
+        {
+            "name": "V.PS-San Jose Starter",
+            "cost": 29.98,
+            "currency": "EUR",
+            "expireDate": "2025-3-1",
+            "color": "primary",
+            "url": "https://v.ps"
+        },
+        {
+            "name": "Bagevm-Hong Kong - BFTINY",
+            "cost": 2.59,
+            "currency": "USD",
+            "expireDate": "2025-12-28",
+            "color": "primary",
+            "url": "https://bagevm.com/clientarea.php"
+        },
+
     ]
     
     # 计算北京时间
